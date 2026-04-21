@@ -473,5 +473,4 @@ GET _remote/info
 
 ## 📬 Author
 
-**Vinay Patel** — [GitHub](https://github.com/elksearch) | [Elastic Certifications](https://credentials.elastic.co/profile/f2ae81ee-1696-4d44-b49d-e42537b2475a)# elasticsearch-cheatsheet
-ELK cheatsheet
+**Vinay Patel** — [GitHub](https://github.com/elksearch) | [Elastic Certifications](https://credentials.elastic.co/profile/f2ae81ee-1696-4d44-b49d-e42537b2475a)
