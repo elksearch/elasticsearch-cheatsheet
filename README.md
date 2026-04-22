@@ -1,7 +1,7 @@
 # 🔍 Elasticsearch Cheatsheet
 
 > A practical, production-grade reference for Elasticsearch cluster operations, ILM, shard management, ingest pipelines, ES|QL and more.
-> Built from 16+ years of real-world observability engineering experience.
+> Built from real-world observability engineering experience, elastic documentation.
 
 ---
 
