@@ -25,10 +25,12 @@ GET _cluster/health?level=indices
 GET _cluster/settings
 GET _cluster/settings?include_defaults=true
 
-# Node info & stats
+# Node info & stats & shards
 GET _nodes
 GET _nodes/stats
 GET _nodes/stats/indices,os,jvm
+GET /_cat/shards/*?v&h=index,shard,prirep,state,store,ip,node
+GET /_cat/nodes?v=true&h=name,heap.current,heap.max,ram.current,ram.max,uptime
 
 # Pending tasks
 GET _cluster/pending_tasks
