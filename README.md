@@ -32,7 +32,7 @@ Production-grade command reference covering cluster health, index operations, sh
 
 ---
 
-## 📅 Today I Learned (TIL) — Complete Index
+## 📅 Today I Learned (TIL) - Index (In Progress)
 
 | Date | Topic | Key Areas Covered |
 |---|---|---|
