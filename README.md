@@ -1,3 +1,5 @@
+⭐ If this helps you, please star this repo!
+
 ## 📁 Repository Structure
 
 ```
@@ -71,3 +73,4 @@ Production-grade command reference covering cluster health, index operations, sh
 ---
 
 *This repository is actively maintained and updated daily.*
+
