@@ -72,5 +72,17 @@ Production-grade command reference covering cluster health, index operations, sh
 
 ---
 
+---
+
+## 💬 Discussions & Feedback
+
+Have a question, suggestion, or want to discuss any topic?
+
+👉 [Start a Discussion](https://github.com/elksearch/elasticsearch-cheatsheet/discussions)
+
+Found an error or want to suggest a new topic?
+
+👉 [Open an Issue](https://github.com/elksearch/elasticsearch-cheatsheet/issues)
+
 *This repository is actively maintained and updated daily.*
 
