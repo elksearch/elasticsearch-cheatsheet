@@ -86,3 +86,19 @@ Found an error or want to suggest a new topic?
 
 *This repository is actively maintained and updated daily.*
 
+---
+
+## ⚠️ Disclaimer
+
+This repository contains notes, examples, and references based on my **personal learning 
+and hands-on experience** with Elasticsearch and the Elastic Stack.
+
+- Content is provided **as-is** for educational purposes only
+- Always refer to the **[official Elastic documentation](https://www.elastic.co/docs)** 
+  for production use
+- Commands and configurations should be **tested in a non-production environment first**
+- The author is not responsible for any issues arising from the use of this content
+- Elastic Stack features and APIs may change — verify against your specific version
+
+> *When in doubt, trust the [official docs](https://www.elastic.co/docs) over this repo.*
+
