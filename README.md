@@ -3,6 +3,7 @@
 ## 📁 Repository Structure
 
 ```
+```
 elasticsearch-cheatsheet/
 │
 ├── README.md                      ← This file — master index
@@ -20,7 +21,15 @@ elasticsearch-cheatsheet/
     ├── 2026-04-30.md              ← CCS & CCR
     ├── 2026-05-01.md              ← Aggregations Deep Dive
     ├── 2026-05-02.md              ← Troubleshooting Guide
-    └── 2026-05-03.md              ← Search Internals & BM25
+    ├── 2026-05-03.md              ← Search Internals & BM25
+    ├── 2026-05-04.md              ← Node Roles & Cluster Architecture
+    ├── 2026-05-05.md              ← Mappings Deep Dive
+    ├── 2026-05-06.md              ← Performance Tuning — Indexing
+    ├── 2026-05-07.md              ← Performance Tuning — Search
+    ├── 2026-05-08.md              ← Observability Stack
+    ├── 2026-05-09.md              ← Upgrade Guide
+
+```
 ```
 
 ---
