@@ -90,7 +90,7 @@ Found an error or want to suggest a new topic?
 
 ## ⚠️ Disclaimer
 
-This repository contains notes, examples, and references based on my **personal learning 
+This repository contains notes, examples and references based on my **personal learning 
 and hands-on experience** with Elasticsearch and the Elastic Stack.
 
 - Content is provided **as-is** for educational purposes only
