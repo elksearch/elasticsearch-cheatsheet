@@ -3,7 +3,7 @@
 ## 📁 Repository Structure
 
 ```
-```
+
 elasticsearch-cheatsheet/
 │
 ├── README.md                      ← This file — master index
@@ -29,7 +29,7 @@ elasticsearch-cheatsheet/
     ├── 2026-05-08.md              ← Observability Stack
     ├── 2026-05-09.md              ← Upgrade Guide
 
-```
+
 ```
 
 ---
