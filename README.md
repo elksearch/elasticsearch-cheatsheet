@@ -47,8 +47,8 @@ Production-grade command reference covering cluster health, index operations, sh
 |---|---|---|
 | [Apr 22](./til/2026-04-22.md) | **Elasticsearch Write Path Internals** | Refresh vs Flush vs Translog, memory-to-disk flow, tuning tips |
 | [Apr 23](./til/2026-04-23.md) | **Sizing & Capacity Planning** | Memory:data ratios, hot-warm-cold sizing formulas, worked examples, AutoOps |
-| [Apr 24](./til/2026-04-24.md) | **ES\|QL — Complete Functions & Operators** | All 13 function categories, 150+ functions, commands, real observability examples |
-| [Apr 25](./til/2026-04-25.md) | **Ingest Processors — Complete Reference** | All 10 processor categories, pipeline skeleton, Nginx example, testing with _simulate |
+| [Apr 24](./til/2026-04-24.md) | **ES\|QL - Complete Functions & Operators** | All 13 function categories, 150+ functions, commands, real observability examples |
+| [Apr 25](./til/2026-04-25.md) | **Ingest Processors - Complete Reference** | All 10 processor categories, pipeline skeleton, Nginx example, testing with _simulate |
 | [Apr 26](./til/2026-04-26.md) | **ELK Stack 9.x on Docker** | Single node, 3-node cluster, Filebeat, Elastic Agent, Fleet, APM, production checklist |
 | [Apr 27](./til/2026-04-27.md) | **Index Templates + Component Templates + Data Streams + ILM** | Full production setup, naming conventions, priority system, day-2 operations |
 | [Apr 28](./til/2026-04-28.md) | **Snapshot & Restore** | S3/GCS/Azure repos, SLM policies, searchable snapshots, DR runbook, cost comparison |
@@ -59,8 +59,8 @@ Production-grade command reference covering cluster health, index operations, sh
 | [May 03](./til/2026-05-03.md) | **Search Internals & BM25** | BM25 algorithm, IDF/TF explained, query vs filter context, explain API, function_score |
 | [May 04](./til/2026-05-04.md) | **Node Roles & Cluster Architecture** | All node roles, hot-warm-cold-frozen tiers, ECK NodeSet, zone awareness |
 | [May 05](./til/2026-05-05.md) | **Mappings Deep Dive** | All field types, dynamic mapping, runtime fields, nested vs object, mapping explosion |
-| [May 06](./til/2026-05-06.md) | **Performance Tuning — Indexing** | Bulk API, translog, thread pools, routing, indexing pressure, OS tuning |
-| [May 07](./til/2026-05-07.md) | **Performance Tuning — Search** | OS cache, caching layers, forcemerge, async search, PIT, profile API |
+| [May 06](./til/2026-05-06.md) | **Performance Tuning - Indexing** | Bulk API, translog, thread pools, routing, indexing pressure, OS tuning |
+| [May 07](./til/2026-05-07.md) | **Performance Tuning - Search** | OS cache, caching layers, forcemerge, async search, PIT, profile API |
 | [May 08](./til/2026-05-08.md) | **Observability Stack** | Elastic Agent, Fleet, APM, OTel, Universal Profiling, SLO/SLI |
 | [May 09](./til/2026-05-09.md) | **Upgrade Guide** | Rolling vs full restart, version compatibility, reindex old indices, ECK upgrade |
 
