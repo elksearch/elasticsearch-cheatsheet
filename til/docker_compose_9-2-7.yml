@@ -1,0 +1,207 @@
+services:
+
+  # ─────────────────────────────────────────
+  # ELASTICSEARCH
+  # ─────────────────────────────────────────
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.7
+    container_name: elasticsearch-9-2-7
+    volumes:
+      - dev-elasticsearch-927:/usr/share/elasticsearch/data
+      - /mnt/c/Docker/elastic-start-9.2.7/config/analysis:/usr/share/elasticsearch/config/analysis
+      - /mnt/c/Docker/elastic-start-9.2.7/snapshot-local-repo:/mnt/c/Docker/elastic-start-9.2.7/snapshot-local-repo
+    ports:
+      - 127.0.0.1:9270:9200
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=elastic
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=false
+      - xpack.license.self_generated.type=trial
+      - xpack.ml.use_auto_machine_memory_percent=true
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - cluster.routing.allocation.disk.watermark.low=1gb
+      - cluster.routing.allocation.disk.watermark.high=1gb
+      - cluster.routing.allocation.disk.watermark.flood_stage=1gb
+      - path.repo=/mnt/c/Docker/elastic-start-9.2.7/snapshot-local-repo
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: ["CMD-SHELL", "curl --output /dev/null --silent --head --fail -u elastic:elastic http://localhost:9200"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+    networks:
+      - elastic-net
+
+  # ─────────────────────────────────────────
+  # KIBANA PASSWORD SETUP
+  # ─────────────────────────────────────────
+  kibana_settings:
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.7
+    container_name: kibana_settings_927
+    restart: "no"
+    networks:
+      - elastic-net
+    command: >
+      bash -c '
+        echo "Setting kibana_system password...";
+        start_time=$$(date +%s);
+        timeout=60;
+        until curl -s -u "elastic:elastic" -X POST http://elasticsearch:9200/_security/user/kibana_system/_password -d "{\"password\":\"elastic\"}" -H "Content-Type: application/json" | grep -q "^{}"; do
+          if [ $$(($$(date +%s) - $$start_time)) -ge $$timeout ]; then
+            echo "Error: Elasticsearch timeout";
+            exit 1;
+          fi;
+          sleep 2;
+        done;
+        echo "kibana_system password set!";
+      '
+
+  # ─────────────────────────────────────────
+  # KIBANA
+  # ─────────────────────────────────────────
+  kibana:
+    depends_on:
+      kibana_settings:
+        condition: service_completed_successfully
+    image: docker.elastic.co/kibana/kibana:9.2.7
+    container_name: kibana-9-2-7
+    volumes:
+      - dev-kibana-927:/usr/share/kibana/data
+      - ./config/telemetry.yml:/usr/share/kibana/config/telemetry.yml
+    ports:
+      - 127.0.0.1:5927:5601
+    environment:
+      - SERVER_NAME=kibana
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=elastic
+      - XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=4596f9082e7b5f844e2f60dad0c990d7165cc307bce126da00a771fee1891a0e
+      - ELASTICSEARCH_PUBLICBASEURL=http://localhost:9270
+      - XPACK_REPORTING_ROLES_ENABLED=false
+      - XPACK_FLEET_ENABLED=true
+      - XPACK_FLEET_AGENTS_ELASTICSEARCH_HOSTS=["http://elasticsearch:9200"]
+      - XPACK_FLEET_AGENTS_FLEET_SERVER_HOSTS=["http://fleet-server:8220"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s -o /dev/null -w '%{http_code}' http://localhost:5601/api/status | grep -q '200'"]
+      interval: 15s
+      timeout: 10s
+      retries: 30
+      start_period: 60s
+    networks:
+      - elastic-net
+
+  # ─────────────────────────────────────────
+  # FLEET KIBANA INIT
+  # ─────────────────────────────────────────
+  fleet_kibana_init:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.7
+    container_name: fleet_kibana_init_927
+    restart: "no"
+    depends_on:
+      kibana:
+        condition: service_healthy
+    networks:
+      - elastic-net
+    command: >
+      bash -c '
+        echo "Initializing Fleet in Kibana...";
+        sleep 5;
+        curl -s -u elastic:elastic \
+          -X POST "http://kibana:5601/api/fleet/setup" \
+          -H "kbn-xsrf: true" \
+          -H "Content-Type: application/json";
+        echo "";
+        curl -s -u elastic:elastic \
+          -X POST "http://kibana:5601/api/fleet/agent_policies" \
+          -H "kbn-xsrf: true" \
+          -H "Content-Type: application/json" \
+          -d "{\"name\":\"Fleet Server Policy\",\"namespace\":\"default\",\"has_fleet_server\":true}";
+        echo "";
+        echo "Fleet init complete!";
+      '
+
+  # ─────────────────────────────────────────
+  # FLEET SERVER
+  # ─────────────────────────────────────────
+  fleet-server:
+    image: docker.elastic.co/elastic-agent/elastic-agent:9.2.7
+    container_name: fleet-server-927
+    user: root
+    restart: unless-stopped
+    depends_on:
+      fleet_kibana_init:
+        condition: service_completed_successfully
+    ports:
+      - 127.0.0.1:8220:8220
+    volumes:
+      - fleet-server-data:/usr/share/elastic-agent/data
+    environment:
+      - FLEET_SERVER_ENABLE=1
+      - FLEET_SERVER_ELASTICSEARCH_HOST=http://elasticsearch:9200
+      - FLEET_SERVER_ELASTICSEARCH_USERNAME=elastic
+      - FLEET_SERVER_ELASTICSEARCH_PASSWORD=elastic
+      - FLEET_SERVER_INSECURE_HTTP=1
+      - FLEET_SERVER_HOST=0.0.0.0
+      - FLEET_SERVER_PORT=8220
+      - KIBANA_HOST=http://kibana:5601
+      - KIBANA_USERNAME=elastic
+      - KIBANA_PASSWORD=elastic
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8220/api/status | grep -q HEALTHY"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 90s
+    networks:
+      - elastic-net
+
+  # ─────────────────────────────────────────
+  # ELASTIC AGENT
+  # NOTE: After first docker compose up -d
+  #       Go to Kibana → Fleet → Enrollment tokens
+  #       Copy token for your policy
+  #       Update FLEET_ENROLLMENT_TOKEN below
+  #       Run: docker compose up -d --force-recreate elastic-agent
+  # ─────────────────────────────────────────
+  elastic-agent:
+    image: docker.elastic.co/elastic-agent/elastic-agent:9.2.7
+    container_name: elastic-agent-927
+    user: root
+    restart: unless-stopped
+    depends_on:
+      fleet-server:
+        condition: service_healthy
+    volumes:
+      - ./practice-logs:/var/log/practice-logs
+      - elastic-agent-data:/usr/share/elastic-agent/data
+    environment:
+      - FLEET_ENROLL=1
+      - FLEET_URL=http://fleet-server:8220
+      - FLEET_ENROLLMENT_TOKEN=<REPLACE_WITH_YOUR_TOKEN>
+      - FLEET_INSECURE=true
+      - FLEET_FORCE_ENROLL=true
+    networks:
+      - elastic-net
+
+# ─────────────────────────────────────────
+# VOLUMES
+# ─────────────────────────────────────────
+volumes:
+  dev-elasticsearch-927:
+  dev-kibana-927:
+  fleet-server-data:
+  elastic-agent-data:
+
+# ─────────────────────────────────────────
+# NETWORK
+# ─────────────────────────────────────────
+networks:
+  elastic-net:
+    driver: bridge
