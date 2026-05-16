@@ -28,6 +28,13 @@ elasticsearch-cheatsheet/
     ├── 2026-05-07.md              ← Performance Tuning — Search
     ├── 2026-05-08.md              ← Observability Stack
     ├── 2026-05-09.md              ← Upgrade Guide
+    ├── 2026-05-10.md              ← Kibana Deep Dive
+    ├── 2026-05-11.md              ← Machine Learning in Elasticsearch
+    ├── 2026-05-12.md              ← Vector Search & AI
+    ├── 2026-05-13.md              ← EQL — Event Query Language
+    ├── 2026-05-14.md              ← Logstash Deep Dive
+    ├── 2026-05-15.md              ← Beats Deep Dive
+    ├── 2026-05-16.md              ← Elasticsearch REST API
 
 
 ```
@@ -63,7 +70,13 @@ Production-grade command reference covering cluster health, index operations, sh
 | [May 07](./til/2026-05-07.md) | **Performance Tuning - Search** | OS cache, caching layers, forcemerge, async search, PIT, profile API |
 | [May 08](./til/2026-05-08.md) | **Observability Stack** | Elastic Agent, Fleet, APM, OTel, Universal Profiling, SLO/SLI |
 | [May 09](./til/2026-05-09.md) | **Upgrade Guide** | Rolling vs full restart, version compatibility, reindex old indices, ECK upgrade |
-
+| [May 10](./til/2026-05-10.md) | **Kibana Deep Dive** | Discover ES\|QL, Lens formulas, Transforms, Spaces, Alerting, Reporting |
+| [May 11](./til/2026-05-11.md) | **Machine Learning in Elasticsearch** | Anomaly detection, DFA, NLP, ELSER, Inference API, LLM integration |
+| [May 12](./til/2026-05-12.md) | **Vector Search & AI** | Dense vectors, KNN, HNSW, hybrid search, RRF, RAG with Python |
+| [May 13](./til/2026-05-13.md) | **EQL — Event Query Language** | Security patterns, MITRE ATT\&CK, sequence queries, SIEM detection rules |
+| [May 14](./til/2026-05-14.md) | **Logstash Deep Dive** | All plugins, conditionals, multiple pipelines, persistent queue, DLQ |
+| [May 15](./til/2026-05-15.md) | **Beats Deep Dive** | Filebeat, Metricbeat, Packetbeat, Heartbeat, Auditbeat, Winlogbeat |
+| [May 16](./til/2026-05-16.md) | **Elasticsearch REST API** | Complete CRUD, Bulk, Search, PIT, scroll, Cat APIs, Task management |
 
 ---
 
