@@ -35,7 +35,14 @@ elasticsearch-cheatsheet/
     ├── 2026-05-14.md              ← Logstash Deep Dive
     ├── 2026-05-15.md              ← Beats Deep Dive
     ├── 2026-05-16.md              ← Elasticsearch REST API
-
+    ├── 2026-05-17.md              ← Cluster Monitoring
+    ├── 2026-05-18.md              ← OpenTelemetry (OTel)
+    ├── 2026-05-19.md              ← Painless Scripting Deep Dive
+    ├── 2026-05-20.md              ← Downsampling & DLM
+    ├── 2026-05-21.md              ← ECK Deep Dive
+    ├── 2026-05-22.md              ← Connectors & Web Crawler
+    ├── 2026-05-23.md              ← Multi-tenancy Patterns
+    └── 2026-05-24.md              ← Production Readiness & Interview Prep
 
 ```
 
@@ -77,7 +84,14 @@ Production-grade command reference covering cluster health, index operations, sh
 | [May 14](./til/2026-05-14.md) | **Logstash Deep Dive** | All plugins, conditionals, multiple pipelines, persistent queue, DLQ |
 | [May 15](./til/2026-05-15.md) | **Beats Deep Dive** | Filebeat, Metricbeat, Packetbeat, Heartbeat, Auditbeat, Winlogbeat |
 | [May 16](./til/2026-05-16.md) | **Elasticsearch REST API** | Complete CRUD, Bulk, Search, PIT, scroll, Cat APIs, Task management |
-
+| [May 17](./til/2026-05-17.md) | **Cluster Monitoring** | Health API, Stack Monitoring, AutoOps, Prometheus, alerting thresholds |
+| [May 18](./til/2026-05-18.md) | **OpenTelemetry (OTel)** | Collector config, SDK instrumentation, trace propagation, K8s deployment |
+| [May 19](./til/2026-05-19.md) | **Painless Scripting Deep Dive** | All contexts, null safety, ingest/search/agg/update, stored scripts, caching |
+| [May 20](./til/2026-05-20.md) | **Downsampling & DLM** | TSDS, 3-tier downsampling, DLM vs ILM, 99% storage reduction |
+| [May 21](./til/2026-05-21.md) | **ECK Deep Dive** | Operator install, production cluster YAML, TLS, keystore, scaling, upgrades |
+| [May 22](./til/2026-05-22.md) | **Connectors & Web Crawler** | SharePoint, Confluence, MongoDB, PostgreSQL, DLS, RAG patterns |
+| [May 23](./til/2026-05-23.md) | **Multi-tenancy Patterns** | Index-per-tenant, shared index + DLS, hybrid pattern, cost attribution |
+| [May 24](./til/2026-05-24.md) | **Production Readiness & Interview Prep** | Full checklist, 15+ interview Q\&A, scenario questions, final principles |
 ---
 
 ## 🔗 Key Official Resources
